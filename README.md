@@ -30,3 +30,10 @@ Additional README details can be found [here](https://github.com/PrimeAcademy/re
                     [X] Source in bootstrap if you like
                 [X] Make vendors folder
                     [X] Add jQuery.js file here
+
+[ ] NPM CHEAT SHEET:
+        [ ] npm init --yes Makes a package.json — only need if doesnt exist already
+        [ ] npm install 'library' installs library to project. Needs package.json
+        [ ] npm install installs ALL EXISTING libraries in package.json
+        [ ] add script "start": "node server/server.js" to package.json
+        [ ] npm start if setup, will start server
