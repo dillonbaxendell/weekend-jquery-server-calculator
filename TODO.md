@@ -30,14 +30,18 @@
 
 
 **Create a user interface where the user can input two values (2 input elements) and the select type of mathematical operation**
-    [] Create index.html structure
+    [X] Create index.html structure
         [X] Create header
         [X] Two input fields created
             [X] first number
             [X] second number
-        [] Mathematical buttons created
+        [X] Mathematical buttons created
             [X] addition
             [X] subtraction
             [X] multiplication
             [X] division
-        [] The calculations have to append somewhere - a table? a list? 
+        [X] The calculations have to append somewhere - a table? a list? 
+
+
+**When the submit (`=` button) is clicked, capture this input, bundle it up in an object, and send this object to the server via a POST. There should also be a 'C' button that will clear the user input fields**
+    
