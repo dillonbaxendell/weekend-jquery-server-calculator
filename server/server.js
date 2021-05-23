@@ -1,18 +1,17 @@
 //GO GET EXPRESS
 const express = require('express');
 const bodyParser = require('body-parser');
+const { doesNotMatch } = require('assert/strict');
 
 //make a server called app
 const app = express();
 const PORT = 5000;
 
 
-let calculations = [ {
-    num1: '2',
-    operator: '-',
-    num2: '4',
-    answer: '-2'
-}];
+let history = [];
+let results;
+
+
 
 
 //SERVE STATIC FILES WHEN REQUESTED
@@ -23,25 +22,43 @@ app.use(bodyParser.urlencoded({extended : true}))
 
 
 //POST IS FOR ADDING NEW DATA
-app.post('/calculations', (req, res) => {
+app.post('/history', (req, res) => {
     //add the incoming quote to quotelist
     // req will have a lot, including our sent quote
     //req.body is made by body-parser
     // info from client
     console.log(req.body);
-    calculations.push(req.body);
+    history.push(req.body);
+    doMath(req.body);
 
     //send back a good response
     res.sendStatus(201);
 });
 
+function doMath(objectForMath) {
+    console.log('in doMath');
 
-app.get('/calculations', (req, res) => {
-    console.log('got to /calculations')
+
+    if( objectForMath.operator === "+" ) {
+        results = Number(objectForMath.num1) + Number(objectForMath.num2);
+    } else if ( objectForMath.operator === "-" ) {
+        results = Number(objectForMath.num1) - Number(objectForMath.num2);
+    } else if ( objectForMath.operator === "*" ) {
+        results = Number(objectForMath.num1) * Number(objectForMath.num2);
+    } else if ( objectForMath.operator === "/" ) {
+        results = Number(objectForMath.num1) / Number(objectForMath.num2);
+    }
+
+    console.log(results)
+}
+
+
+app.get('/history', (req, res) => {
+    console.log('got to /history')
 
     //respond
     //Hint: whatever is in send is what response is on client.js
-    res.send(calculations);
+    res.send(history);
 })
 
 

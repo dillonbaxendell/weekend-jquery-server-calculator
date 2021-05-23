@@ -26,74 +26,39 @@ function readyNow() {
 //#endregion
 
 function handleAdd() {
-    console.log('in handleAdd');
+    console.log('clicked add!');
 
     //set the operator to +
     operator = `+`;
-
-    // declare the numbers as the value of the inputs
-    let num1 = Number($('#firstCalculation').val());
-    let num2 = Number($('#secondCalculation').val());
-
-    // have the answer be the sum of the two numbers
-    answer = Number(num1 + num2);
-
-    console.log(answer);
-    return answer;
+    console.log(operator);
     
 }
 
 function handleSubtract() {
-    console.log('in handleSubtract');
+    console.log('clicked subtract!');
 
     //set the operator to -
     operator = `-`;
+    console.log(operator);
 
-    // declare the numbers as the value of the inputs
-    let num1 = Number($('#firstCalculation').val());
-    let num2 = Number($('#secondCalculation').val());
-
-    // have the answer be the difference of the two numbers
-    answer = Number(num1 - num2);
-
-    console.log(answer);
-    return answer;
     
 }
 
 function handleMultiply() {
-    console.log('in handleMultiply');
+    console.log('clicked multiply!');
 
     //set the operator to *
     operator = `*`;
-
-    // declare the numbers as the value of the inputs
-    let num1 = Number($('#firstCalculation').val());
-    let num2 = Number($('#secondCalculation').val());
-
-    // have the answer be the two numbers times each other
-    answer = Number(num1 * num2);
-
-    console.log(answer);
-    return answer;
+    console.log(operator);
     
 }
 
 function handleDivide() {
-    console.log('in handleDivide');
+    console.log('clicked divide!');
 
     //set the operator to /
     operator = `/`;
-
-    // declare the numbers as the value of the inputs
-    let num1 = Number($('#firstCalculation').val());
-    let num2 = Number($('#secondCalculation').val());
-
-    // have the answer be the num1 divided by num2
-    answer = Number(num1 / num2);
-
-    console.log(answer);
-    return answer;
+    console.log(operator);
     
 }
 
@@ -107,14 +72,13 @@ function newCalculation() {
         num1: Number($('#firstCalculation').val()),
         operator: operator,
         num2: Number($('#secondCalculation').val()),
-        answer: answer
     }
     // We need to add to the array that's on the server.js
-    // Push the newCalculation into the calculations array
+    // Push the newCalculation into the history array
     // MAKE A POST REQUEST WITH newCalculations
     // Hint: data should always be an object
     $.ajax({
-        url: '/calculations',
+        url: '/history',
         method: 'POST',
         // Hint: We need to send a third for POST requests
         data: newCalculation// this is what becomes req.body
@@ -130,7 +94,7 @@ function getCalculations() {
     // on server.js
     $.ajax({
         method: 'GET',
-        url: '/calculations'
+        url: '/history'
     }).then(function (response) {
         console.log(response);
         // empty the DOM
@@ -138,7 +102,7 @@ function getCalculations() {
         // append the calculations to the DOM
         for (let input of response) {
             $('#target').append(`
-            <li>${input.num1} ${input.operator} ${input.num2} = ${input.answer}</li>
+            <li>${input.num1} ${input.operator} ${input.num2} =</li>
             `);
         }
         
