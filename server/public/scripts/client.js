@@ -5,7 +5,7 @@ console.log('js loaded');
 $( document ).ready( readyNow );
 
 let operator = ``;
-let answer = 0;
+let answer;
 
 //#region - Upon Load, do this:
 function readyNow() {
@@ -14,6 +14,7 @@ function readyNow() {
 
     // Click Listeners
     // load buttons to be ready to function if clicked
+    $( '#clear' ).on( 'click', handleClear );
     $( '#equals' ).on( 'click',  handleEquals );
     $( '#addition' ).on( 'click', handleAdd );
     $( '#subtraction' ).on( 'click', handleSubtract );
@@ -62,8 +63,6 @@ function handleDivide() {
     
 }
 
-
-
 function handleEquals() {
     console.log('in newCalculation');
 
@@ -83,21 +82,33 @@ function handleEquals() {
         // Hint: We need to send a third for POST requests
         data: newCalculation// this is what becomes req.body
     }).then(response => {
+        
         console.log(response);
         getCalculations();
         getResults();
     })
 }
 
+function handleClear() {
+    console.log('clicked clear!');
+
+
+    $( '#firstCalculation' ).val( '' );
+    $( '#secondCalculation' ).val( '' );
+
+    $( '#results' ).val( '' );
+
+}
+
 function getResults() {
     console.log('in getResults');
-    getCalculations()
     
     $.ajax({
         method: 'GET',
         url: '/results'
     }).then(function (response) {
         console.log(response);
+
         //empty the DOM
         $('#results').empty();
         //append the calculations to the DOM
@@ -124,6 +135,8 @@ function getCalculations() {
             <li>${input.num1} ${input.operator} ${input.num2} = ${input.answer}</li>
             `);
         }
+     
         
     })
+   
 }

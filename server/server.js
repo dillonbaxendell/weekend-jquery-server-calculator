@@ -56,14 +56,6 @@ app.post('/calculator', (req, res) => {
 
     history.push(newObject);
 
-    app.get('/results', (req, res) => {
-        console.log('got to /results')
-    
-        //respond
-        //Hint: whatever is in send is what response is on client.js
-        res.send(newObject);
-    })
-
     //send back a good response
     res.sendStatus(201);
 });
@@ -74,6 +66,14 @@ app.get('/history', (req, res) => {
     //respond
     //Hint: whatever is in send is what response is on client.js
     res.send(history);
+})
+
+app.get('/results', (req, res) => {
+    console.log('got to /results')
+
+    //respond
+    //Hint: whatever is in send is what response is on client.js
+    res.send( {answer: answer} );
 })
 
 
