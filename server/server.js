@@ -9,7 +9,7 @@ const PORT = 5000;
 
 
 let history = [];
-let results;
+let answer;
 
 
 
@@ -22,36 +22,51 @@ app.use(bodyParser.urlencoded({extended : true}))
 
 
 //POST IS FOR ADDING NEW DATA
-app.post('/history', (req, res) => {
+app.post('/calculator', (req, res) => {
     //add the incoming quote to quotelist
     // req will have a lot, including our sent quote
     //req.body is made by body-parser
     // info from client
     console.log(req.body);
-    history.push(req.body);
-    doMath(req.body);
+    results = req.body;
+    operator = results.operator;
+    num1 = Number(results.num1);
+    num2 = Number(results.num2);
+
+    if( operator === '+') {
+        answer = num1 + num2;
+        console.log(answer);
+    } else if (operator === '-') {
+         answer = num1 - num2;
+         console.log(answer);
+    } else if (operator === '*') {
+        answer = num1 * num2;
+        console.log(answer);
+    } else if (operator === '/') {
+        answer = num1 / num2;
+        console.log(answer);  
+    }
+
+    let newObject = {
+        num1: num1,
+        operator: operator,
+        num2: num2,
+        answer: answer
+    }
+
+    history.push(newObject);
+
+    app.get('/results', (req, res) => {
+        console.log('got to /results')
+    
+        //respond
+        //Hint: whatever is in send is what response is on client.js
+        res.send(newObject);
+    })
 
     //send back a good response
     res.sendStatus(201);
 });
-
-function doMath(objectForMath) {
-    console.log('in doMath');
-
-
-    if( objectForMath.operator === "+" ) {
-        results = Number(objectForMath.num1) + Number(objectForMath.num2);
-    } else if ( objectForMath.operator === "-" ) {
-        results = Number(objectForMath.num1) - Number(objectForMath.num2);
-    } else if ( objectForMath.operator === "*" ) {
-        results = Number(objectForMath.num1) * Number(objectForMath.num2);
-    } else if ( objectForMath.operator === "/" ) {
-        results = Number(objectForMath.num1) / Number(objectForMath.num2);
-    }
-
-    console.log(results)
-}
-
 
 app.get('/history', (req, res) => {
     console.log('got to /history')
