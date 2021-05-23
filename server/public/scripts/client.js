@@ -82,9 +82,12 @@ function handleEquals() {
         // Hint: We need to send a third for POST requests
         data: newCalculation// this is what becomes req.body
     }).then(response => {
-        
         console.log(response);
+        
+        //get the history of calculations
         getCalculations();
+
+        //get the results
         getResults();
     })
 }
@@ -92,17 +95,21 @@ function handleEquals() {
 function handleClear() {
     console.log('clicked clear!');
 
-
+    // clear the input fields 
     $( '#firstCalculation' ).val( '' );
     $( '#secondCalculation' ).val( '' );
 
+    // clear the results on the DOM
     $( '#results' ).val( '' );
 
 }
 
 function getResults() {
     console.log('in getResults');
-    
+
+    // go to server route /results
+    // Hint: ajax is a messenger, or promise, and should match the app.get('/results')
+    // on server.js
     $.ajax({
         method: 'GET',
         url: '/results'
@@ -119,8 +126,9 @@ function getResults() {
 
 function getCalculations() {
     console.log('in getCalculations');
-    // go to server route /calculations
-    // Hint: ajax is a messenger, or promise, and should match the app.get('/calculations')
+
+    // go to server route /history
+    // Hint: ajax is a messenger, or promise, and should match the app.get('/history')
     // on server.js
     $.ajax({
         method: 'GET',
@@ -129,7 +137,7 @@ function getCalculations() {
         console.log(response);
         // empty the DOM
         $('#target').empty();
-        // append the calculations to the DOM
+        // append the history to the DOM
         for (let input of response) {
             $('#target').append(`
             <li>${input.num1} ${input.operator} ${input.num2} = ${input.answer}</li>

@@ -1,17 +1,16 @@
 //GO GET EXPRESS
 const express = require('express');
 const bodyParser = require('body-parser');
-const { doesNotMatch } = require('assert/strict');
+
 
 //make a server called app
 const app = express();
 const PORT = 5000;
 
 
+//declare global variables
 let history = [];
 let answer;
-
-
 
 
 //SERVE STATIC FILES WHEN REQUESTED
@@ -21,7 +20,7 @@ app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({extended : true}))
 
 
-//POST IS FOR ADDING NEW DATA
+//GRABS THE DATA FROM THE CLIENT
 app.post('/calculator', (req, res) => {
     //add the incoming quote to quotelist
     // req will have a lot, including our sent quote
@@ -60,6 +59,8 @@ app.post('/calculator', (req, res) => {
     res.sendStatus(201);
 });
 
+
+//GETS THE HISTORY ARRAY TO THE CLIENT
 app.get('/history', (req, res) => {
     console.log('got to /history')
 
@@ -68,6 +69,8 @@ app.get('/history', (req, res) => {
     res.send(history);
 })
 
+
+//GETS THE ANSWER TO THE CLIENT (INDIVIDUALLY)
 app.get('/results', (req, res) => {
     console.log('got to /results')
 
@@ -75,6 +78,8 @@ app.get('/results', (req, res) => {
     //Hint: whatever is in send is what response is on client.js
     res.send( {answer: answer} );
 })
+
+
 
 
 // start listening for connections
