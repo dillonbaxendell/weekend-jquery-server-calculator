@@ -7,7 +7,12 @@ const app = express();
 const PORT = 5000;
 
 
-let calculations = [ {num1: '2', num2: '4'}];
+let calculations = [ {
+    num1: '2',
+    operator: '-',
+    num2: '4',
+    answer: '-2'
+}];
 
 
 //SERVE STATIC FILES WHEN REQUESTED
