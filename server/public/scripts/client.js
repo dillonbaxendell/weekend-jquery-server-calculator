@@ -66,30 +66,38 @@ function handleDivide() {
 function handleEquals() {
     console.log('in newCalculation');
 
-    //gather input values
-    let newCalculation = {
-        num1: Number($('#firstCalculation').val()),
-        operator: operator,
-        num2: Number($('#secondCalculation').val()),
-    }
-    // We need to add to the array that's on the server.js
-    // Push the newCalculation into the history array
-    // MAKE A POST REQUEST WITH newCalculations
-    // Hint: data should always be an object
-    $.ajax({
-        url: '/calculator',
-        method: 'POST',
-        // Hint: We need to send a third for POST requests
-        data: newCalculation// this is what becomes req.body
-    }).then(response => {
-        console.log(response);
-        
-        //get the history of calculations
-        getCalculations();
+    let numOne = $('#firstCalculation').val();
+    let numTwo = $('#secondCalculation').val();
 
-        //get the results
-        getResults();
-    })
+    if( numOne === '' || numTwo === '') {
+        alert('***PLEASE ENTER VALID NUMBERS***');
+    } else {
+
+        //gather input values
+        let newCalculation = {
+            num1: Number(numOne),
+            operator: operator,
+            num2: Number(numTwo),
+        }
+        // We need to add to the array that's on the server.js
+        // Push the newCalculation into the history array
+        // MAKE A POST REQUEST WITH newCalculations
+        // Hint: data should always be an object
+        $.ajax({
+            url: '/calculator',
+            method: 'POST',
+            // Hint: We need to send a third for POST requests
+            data: newCalculation// this is what becomes req.body
+        }).then(response => {
+            console.log(response);
+            
+            //get the history of calculations
+            getCalculations();
+
+            //get the results
+            getResults();
+        })
+    }
 }
 
 function handleClear() {

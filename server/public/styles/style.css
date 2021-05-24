@@ -1,0 +1,25 @@
+body {
+
+}
+
+header {
+    border-bottom: 2px solid black;
+    margin-bottom: 10px;
+}
+
+.button {
+    border: .5px solid black;
+}
+
+h1 {
+    text-align: center;
+}
+
+#form {
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+}
+
+#target {
+    list-style: none;
+}

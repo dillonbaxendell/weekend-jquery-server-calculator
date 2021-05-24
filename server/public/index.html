@@ -4,37 +4,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/style.css">
+    
     <script src="./vendors/jquery-3.6.0.js"></script>
     <script src="./scripts/client.js"></script>
+    <link rel="stylesheet" href="./vendors/bootstrap.css">
+    <link rel="stylesheet" href="./styles/style.css">
+
     <title>Calculator</title>
 </head>
-<body>
+<body class="container">
     <header>
-        <h1>Server Side Calculator</h1>
+        <h1 class="display-1">SERVER SIDE CALCULATOR</h1>
     </header>
     <section class="input">
+        <div id="form">
+    <div class="input-group mb-6">
         <input type="number" id="firstCalculation">
-        <button id="addition" value=+>+</button>
-        <button id="subtraction" value="-">-</button>
-        <button id="multiplication" value="*">*</button>
-        <button id="division" value="/">/</button>
+
+    
+        <button id="addition" class="button btn btn-success" value=+>+</button>
+        <button id="subtraction" class="button btn btn-success" value="-">-</button>
+        <button id="multiplication" class="button btn btn-success" value="*">*</button>
+        <button id="division" class="button btn btn-success" value="/">/</button>
+
         <input type="number" id="secondCalculation">
-        <button id="equals">=</button>
-        <button id="clear">C</button>
+    
+
+        <button id="equals" class="button btn btn-primary">=</button>
+        <button id="clear" class="button btn btn-warning">C</button>
+        </div>
+    </div>
     </section>
+
+        <div>
+            <h2 id="results" class="display-3"></h2>
+        </div>
 
     <div>
 
-        <h2 id="results"></h2>
+        
         <!-- results of current operand will append here -->
     
     </div>
 
     <section>
-        <ul id="target">
+    <table class="table">
+        <tr>
+            <th>History:</th>
+        </tr>
+        <tr>
+            <td>
+                <ul id="target">
             <!-- jQuery will append calculations here -->
-        </ul>
+                </ul>
+            </td>
+        </tr>
+    </table>
     </section>
     
 </body>
