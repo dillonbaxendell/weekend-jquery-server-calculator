@@ -27,6 +27,7 @@ app.post('/calculator', (req, res) => {
     //req.body is made by body-parser
     // info from client
     console.log(req.body);
+    
     results = req.body;
     operator = results.operator;
     num1 = Number(results.num1);

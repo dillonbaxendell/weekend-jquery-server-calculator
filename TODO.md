@@ -45,3 +45,44 @@
 
 **When the submit (`=` button) is clicked, capture this input, bundle it up in an object, and send this object to the server via a POST. There should also be a 'C' button that will clear the user input fields**
     
+
+Data Model
+
+Operations
+[ 
+    {
+        firstNumber: 12,
+        secondNumber: 4,
+        operator: '-',      // todo, how do you store an operator???
+        result: 8
+    }
+]
+
+
+API Endpoints
+
+POST /operations
+    Sends an operation to the server
+
+    Request body:
+    {
+        firstNumber: 12,
+        secondNumber: 4,
+        operator: '-',    
+    }
+
+    Respond with OK (201)
+
+GET /operations
+    Gets a list of operations from the server
+
+    Response body
+    [ 
+        {
+            firstNumber: 12,
+            secondNumber: 4,
+            operator: '-',      // todo, how do you store an operator???
+            result: 8
+        },
+        and more...
+    ]
